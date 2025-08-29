@@ -1,0 +1,5 @@
+f1=open("data1.txt","w")
+f2=open("data2.txt","w")
+f1.write("Fruits file content\n")
+f2.write("second file content\n")
+print("Files written successfully")
