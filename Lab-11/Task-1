@@ -1,0 +1,87 @@
+class Stack:
+    """A simple Stack implementation in Python.
+
+    Provides standard stack operations such as push, pop, peek, is_empty, and size.
+    """
+
+    def __init__(self):
+        """Initialize an empty stack."""
+        self._items = []
+
+    def push(self, item):
+        """Push an item onto the stack.
+
+        Args:
+            item: The item to be added to the stack.
+        """
+        self._items.append(item)
+        print(f"Pushed {item!r}: {self._items}")
+
+    def pop(self):
+        """Remove and return the top item from the stack.
+
+        Returns:
+            The item at the top of the stack.
+
+        Raises:
+            IndexError: If the stack is empty.
+        """
+        if self.is_empty():
+            print("Error: pop from empty stack")
+            raise IndexError('pop from empty stack')
+        popped_item = self._items.pop()
+        print(f"Popped {popped_item!r}: {self._items}")
+        return popped_item
+
+    def peek(self):
+        """Return the top item from the stack without removing it.
+
+        Returns:
+            The item at the top of the stack.
+
+        Raises:
+            IndexError: If the stack is empty.
+        """
+        if self.is_empty():
+            print("Error: peek from empty stack")
+            raise IndexError('peek from empty stack')
+        print(f"Peeked at {self._items[-1]!r}: {self._items}")
+        return self._items[-1]
+
+    def is_empty(self):
+        """Check whether the stack is empty.
+
+        Returns:
+            True if the stack is empty, False otherwise.
+        """
+        empty = len(self._items) == 0
+        print(f"Is empty? {empty}")
+        return empty
+
+    def size(self):
+        """Return the number of items in the stack.
+
+        Returns:
+            The size of the stack as an integer.
+        """
+        sz = len(self._items)
+        print(f"Size: {sz}")
+        return sz
+if __name__ == "__main__":
+    s = Stack()
+    s.is_empty()    # True
+    s.push(10)
+    s.push(20)
+    s.peek()        # 20
+    s.push(30)
+    s.size()        # 3
+    s.pop()
+    s.pop()
+    s.pop()
+    s.is_empty()    # True
+    # Next line will raise IndexError and print an error
+    try:
+        s.pop()
+    except IndexError:
+        pass
+

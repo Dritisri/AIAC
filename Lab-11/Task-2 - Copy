@@ -1,0 +1,69 @@
+class ListQueue:
+    """A simple queue implementation using Python lists."""
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError("dequeue from empty queue")
+        return self.queue.pop(0)
+
+    def is_empty(self):
+        return len(self.queue) == 0
+
+    def size(self):
+        return len(self.queue)
+
+from collections import deque
+import time
+
+class DequeQueue:
+    """An optimized queue implementation using collections.deque."""
+    def __init__(self):
+        self.queue = deque()
+
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        if self.is_empty():
+            raise IndexError("dequeue from empty queue")
+        return self.queue.popleft()
+
+    def is_empty(self):
+        return len(self.queue) == 0
+
+    def size(self):
+        return len(self.queue)
+
+def performance_comparison():
+    N = 100000
+
+    # Timing ListQueue
+    lq = ListQueue()
+    start_time = time.time()
+    for i in range(N):
+        lq.enqueue(i)
+    for i in range(N):
+        lq.dequeue()
+    list_time = time.time() - start_time
+
+    # Timing DequeQueue
+    dq = DequeQueue()
+    start_time = time.time()
+    for i in range(N):
+        dq.enqueue(i)
+    for i in range(N):
+        dq.dequeue()
+    deque_time = time.time() - start_time
+
+    print("Performance comparison:")
+    print(f"ListQueue: {list_time:.4f} seconds for {N} enqueues and dequeues")
+    print(f"DequeQueue: {deque_time:.4f} seconds for {N} enqueues and dequeues")
+    print("AI analysis: ListQueue dequeue is O(n) because pop(0) requires shifting elements. DequeQueue dequeue is O(1). Therefore, DequeQueue is significantly faster for large workloads.")
+
+# Example execution of performance comparison (comment out if running in a constrained environment)
+performance_comparison()
